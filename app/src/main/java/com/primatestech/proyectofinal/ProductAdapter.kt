@@ -3,43 +3,39 @@ package com.primatestech.proyectofinal
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
 
+class ProductAdapter(private val productList: MutableList<Product>) :
+    RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
-class ProductAdapter (private var products: List<Product>): RecyclerView.Adapter<ProductAdapter.CountryViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryViewHolder {
-
-        val inflador = LayoutInflater.from(parent.context)
-
-        val view = inflador.inflate(R.layout.item_product, parent, false)
-        return CountryViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_product, parent, false)
+        return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: CountryViewHolder, position: Int) {
-        val product = products[position]
-        holder.render(product)
-
-        //aquí se aplica la lógica. ej: onClickListener
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val product = productList[position]
+        holder.bind(product)
     }
 
     override fun getItemCount(): Int {
-        return products.size
+        return productList.size
     }
 
-    class CountryViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    // Método para agregar nuevos productos
+    fun addProducts(newProducts: List<Product>) {
+        productList.addAll(newProducts)
+    }
 
-        val name: TextView = view.findViewById(R.id.product_name)
-        val price: TextView = view.findViewById(R.id.product_price)
-        val imagen: ImageView = view.findViewById(R.id.product_imagen)
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val textViewProductName: TextView = itemView.findViewById(R.id.textViewProductName)
+        private val textViewProductPrice: TextView = itemView.findViewById(R.id.textViewProductPrice)
 
-        fun render(product: Product) {
-            name.text = product.name + ", "
-            price.text = product.price
-            Picasso.get().load(product.imagen).into(imagen)
-
+        fun bind(product: Product) {
+            textViewProductName.text = product.name
+            textViewProductPrice.text = "$${product.price}"
         }
     }
 }
