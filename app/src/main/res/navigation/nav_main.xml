@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_main"
-    app:startDestination="@id/homeFragment2">
+    app:startDestination="@id/listFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -11,12 +11,12 @@
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
-            android:id="@+id/action_loginFragment_to_homeFragment2"
-            app:destination="@id/homeFragment2" />
+            android:id="@+id/action_loginFragment_to_listFragment"
+            app:destination="@id/listFragment" />
     </fragment>
     <fragment
-        android:id="@+id/homeFragment2"
-        android:name="com.primatestech.proyectofinal.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/listFragment"
+        android:name="com.primatestech.proyectofinal.ListFragment"
+        android:label="fragment_list"
+        tools:layout="@layout/fragment_list" />
 </navigation>
